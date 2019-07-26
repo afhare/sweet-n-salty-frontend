@@ -12,13 +12,13 @@ class IngredientsContainer extends React.Component {
     
     renderSaltyIngredients = () => {
         return this.props.saltyIngredients.map((ingredient) => {
-            return (<CheckboxIngredient ingredient={ingredient} checked={()=> this.props.checked(ingredient)} addSnackIngredient={() => this.props.addSnackIngredient(ingredient)}/>)
+            return (<CheckboxIngredient ingredient={ingredient} addSnackIngredient={this.props.addSnackIngredient} removeSnackIngredient={this.props.removeSnackIngredient} flavor='salty'/>)
         })
     }
 
     renderSweetIngredients = () => {
         return this.props.sweetIngredients.map((ingredient) => {
-            return <CheckboxIngredient ingredient={ingredient} checked={()=> this.props.checked(ingredient)} addSnackIngredient={() => this.props.addSnackIngredient(ingredient)}/>
+            return <CheckboxIngredient ingredient={ingredient} addSnackIngredient={this.props.addSnackIngredient} removeSnackIngredient={this.props.removeSnackIngredient} flavor='sweet'/>
         })
     }
 
@@ -35,13 +35,11 @@ class IngredientsContainer extends React.Component {
                 <div className='salty-ingredients'>
                     <h3>Salty  
                     <button className='display-salty-ingredients' onClick={(e)=> {this.displayMore(e)}} name='saltyShowButton'>+</button></h3>
-                    <br/>
                     {this.state.saltyShowButton ? this.renderSaltyIngredients() : null}
                 </div>
                 <div className='sweet-ingredients'>
                     <h3>Sweet  
                     <button className='display-sweet-ingredients' onClick={(e)=> {this.displayMore(e)}} name='sweetShowButton'>+</button></h3>
-                    <br/>
                     {this.state.sweetShowButton ? this.renderSweetIngredients() : null}
                 </div>
             </div>

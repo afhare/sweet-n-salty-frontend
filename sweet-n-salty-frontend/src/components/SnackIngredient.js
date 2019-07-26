@@ -2,7 +2,7 @@ import React from 'react'
 
 const SnackIngredient = props => {
         return (
-            <p> ◦ {props.ingredient.name} </p>
+            <li> {props.ingredient.amount} {props.ingredient.size} {props.ingredient.name} </li>
         )
 }
 

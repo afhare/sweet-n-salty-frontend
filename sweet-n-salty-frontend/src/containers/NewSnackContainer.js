@@ -16,9 +16,17 @@ class NewSnackContainer extends React.Component {
         return this.state.snackIngredients.includes(ingredient)
     }
 
-    addSnackIngredient = (ingredient) => {
+    addSnackIngredient = (ingredientObj) => {
+        debugger;
         this.setState({
-            snackIngredients: [...this.state.snackIngredients, ingredient]
+            snackIngredients: [...this.state.snackIngredients, ingredientObj]
+        })
+    }
+    
+    removeSnackIngredient = (ingredientObj) => {
+        const filteredSnackIngredients = this.state.snackIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
+        this.setState({
+            snackIngredients: [...filteredSnackIngredients]
         })
     }
 
@@ -26,7 +34,9 @@ class NewSnackContainer extends React.Component {
         return(
             <div>
                 <label>Currently Added Snack Ingredients:</label>
-                {this.displayIngredientsInProgress()}
+                <ul className='snack-ingredient'>
+                    {this.displayIngredientsInProgress()}
+                </ul>
             </div>
         )
     }
@@ -37,25 +47,31 @@ class NewSnackContainer extends React.Component {
         })
     }
 
-    handleInputChange = () => {
-        //this.setState
+    handleInputChange = (e) => {
+        // this.setState({
+
+        // })
     }
+
 
     render(){
         const { snackIngredients } = this.state
         const { saltyIngredients, sweetIngredients } = this.props
         return (
             <div className='new-snack-form'>
+                <h2>Create a New Snack</h2>
                     {snackIngredients.length > 0 ? this.renderAddedIngredients() : null }
                 <form onSubmit={() => {this.props.handleNewFormSubmit(this.state)}}>
                     <label>Snack Name:</label><br/>
-                    <input type='text'name='snackName'onChange={this.handleInputChange}/><br/>
+                    <input type='text'name='snackName'onChange={(e) => this.handleInputChange(e)}/><br/>
                     <br/>
                     <label>Snack Description:</label><br/>
-                    <textarea name='snackDescription' rows='4' cols='30'onChange={this.handleInputChange}/><br/>
-
-                    <IngredientsContainer checked={(ingredient) => this.checkAddedIngredients(ingredient)} saltyIngredients={saltyIngredients} sweetIngredients={sweetIngredients} addSnackIngredient={(ingredient) => this.addSnackIngredient(ingredient)}/>
-                    
+                    <textarea name='snackDescription' rows='4' cols='30'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <br/>
+                    <hr width='50%' />
+                    <br />
+                    <IngredientsContainer checked={(ingredient) => this.checkAddedIngredients(ingredient)} saltyIngredients={saltyIngredients} sweetIngredients={sweetIngredients} addSnackIngredient={ this.addSnackIngredient} removeSnackIngredient={ this.removeSnackIngredient}/>
+                    <br />
                     <input type='submit'/>
                 </form>
             </div>
