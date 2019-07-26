@@ -5,7 +5,7 @@ class CheckboxIngredient extends React.Component {
         super(props);
         this.state={
             name: this.props.ingredient.name,
-            flavor: this.props.flavor,
+            type: this.props.type,
             amount: undefined,
             size: undefined,
             checked: false,
@@ -16,17 +16,19 @@ class CheckboxIngredient extends React.Component {
     handleCheckbox = () => {
         this.setState({ checked: !this.state.checked })
         if (!!this.state.checked && this.state.confirmed) {
-            this.props.removeSnackIngredient({name: this.state.name, flavor: this.state.flavor, amount: this.state.amount, size: this.state.size})
+            window.alert(`The ${this.state.name} has/have been removed from your snack recipe!`)
+            const amount = `${this.state.amount} ${this.state.size}`
+            this.props.removeSnackIngredient({name: this.state.name, type: this.state.type, amount: amount})
             this.setState({confirmed: false})
         }
     }
 
     collectSnackIngredient = (e) => {
-        if (e.target.value == 'cup' || e.target.value == 'tablespoon'){
+        if (e.target.value === 'cup' || e.target.value === 'tablespoon'){
             this.setState({
                 size: e.target.value
             })
-        } else if (e.target.value == '1/4' || e.target.value == '1/2' || e.target.value == '3/4' || e.target.value == '1'){
+        } else if (e.target.value === '1/4' || e.target.value === '1/2' || e.target.value === '3/4' || e.target.value === '1'){
             this.setState({
                 amount: e.target.value
             })
@@ -39,7 +41,8 @@ class CheckboxIngredient extends React.Component {
             this.setState({
                 confirmed: !this.state.confirmed
             })
-            this.props.addSnackIngredient({name: this.state.name, flavor: this.state.flavor, amount: this.state.amount, size: this.state.size})
+            const amount = `${this.state.amount} ${this.state.size}`
+            this.props.addSnackIngredient({name: this.state.name, type: this.state.type, amount: amount})
         } else {
             window.alert('Please select an amount and/or size to continue.')
         }
