@@ -35,3 +35,23 @@
 .snack-ingredient{
   list-style-type: none; 
 }
+
+.sweet, .salty, .mixed {
+  border-radius: 30px;
+  padding: .5em;
+}
+
+.sweet{
+  background: rgb(31, 9, 31);
+  color: white;
+}
+
+.salty {
+  background: rgb(247, 195, 100);
+  color: black;
+}
+
+.mixed {
+  background: rgb(14, 97, 14);
+  color: white;
+}
