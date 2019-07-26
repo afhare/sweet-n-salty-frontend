@@ -6,27 +6,27 @@ class NewSnackContainer extends React.Component {
     constructor(props){
         super(props)
         this.state={
-          snackIngredients: [],
-          snackName: undefined,
-          snackDescription: undefined  
+          mixes: [],
+          name: undefined,
+          description: undefined,
+          occasion: undefined  
         }
     }
 
     checkAddedIngredients = (ingredient) => {
-        return this.state.snackIngredients.includes(ingredient)
+        return this.state.mixes.includes(ingredient)
     }
 
     addSnackIngredient = (ingredientObj) => {
-        debugger;
         this.setState({
-            snackIngredients: [...this.state.snackIngredients, ingredientObj]
+            mixes: [...this.state.mixes, ingredientObj]
         })
     }
     
     removeSnackIngredient = (ingredientObj) => {
-        const filteredSnackIngredients = this.state.snackIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
+        const filteredMixes = this.state.snackIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
         this.setState({
-            snackIngredients: [...filteredSnackIngredients]
+            mixes: [...filteredMixes]
         })
     }
 
@@ -42,31 +42,34 @@ class NewSnackContainer extends React.Component {
     }
 
     displayIngredientsInProgress = () => {
-        return this.state.snackIngredients.map((ingredient) => {
+        return this.state.mixes.map((ingredient) => {
             return <SnackIngredient ingredient={ingredient}/>
         })
     }
 
     handleInputChange = (e) => {
-        // this.setState({
-
-        // })
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
 
     render(){
-        const { snackIngredients } = this.state
-        const { saltyIngredients, sweetIngredients } = this.props
+        const { mixes } = this.state
+        const { saltyIngredients, sweetIngredients,handleNewFormSubmit } = this.props
         return (
             <div className='new-snack-form'>
                 <h2>Create a New Snack</h2>
-                    {snackIngredients.length > 0 ? this.renderAddedIngredients() : null }
-                <form onSubmit={() => {this.props.handleNewFormSubmit(this.state)}}>
+                    {mixes.length > 0 ? this.renderAddedIngredients() : null }
+                <form onSubmit={(e) => {handleNewFormSubmit(e,this.state)}}>
                     <label>Snack Name:</label><br/>
-                    <input type='text'name='snackName'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <input type='text'name='name'onChange={(e) => this.handleInputChange(e)}/><br/>
                     <br/>
                     <label>Snack Description:</label><br/>
-                    <textarea name='snackDescription' rows='4' cols='30'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <textarea name='description' rows='4' cols='30'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <label>This Snack Is Perfect For:</label><br/>
+                    <input type='text'name='occasion'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <br/>
                     <br/>
                     <hr width='50%' />
                     <br />

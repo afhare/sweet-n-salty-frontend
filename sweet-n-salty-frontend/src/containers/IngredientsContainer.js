@@ -12,13 +12,13 @@ class IngredientsContainer extends React.Component {
     
     renderSaltyIngredients = () => {
         return this.props.saltyIngredients.map((ingredient) => {
-            return (<CheckboxIngredient ingredient={ingredient} addSnackIngredient={this.props.addSnackIngredient} removeSnackIngredient={this.props.removeSnackIngredient} flavor='salty'/>)
+            return (<CheckboxIngredient ingredient={ingredient} addSnackIngredient={this.props.addSnackIngredient} removeSnackIngredient={this.props.removeSnackIngredient} type='salty'/>)
         })
     }
 
     renderSweetIngredients = () => {
         return this.props.sweetIngredients.map((ingredient) => {
-            return <CheckboxIngredient ingredient={ingredient} addSnackIngredient={this.props.addSnackIngredient} removeSnackIngredient={this.props.removeSnackIngredient} flavor='sweet'/>
+            return <CheckboxIngredient ingredient={ingredient} addSnackIngredient={this.props.addSnackIngredient} removeSnackIngredient={this.props.removeSnackIngredient} type='sweet'/>
         })
     }
 
