@@ -1,5 +1,6 @@
 import React from 'react'
 import CheckboxIngredient from '../components/CheckboxIngredient'
+import CreateYourOwnIngredientContainer from './CreateYourOwnIngredientContainer';
 
 class IngredientsContainer extends React.Component {
     constructor(props){
@@ -42,6 +43,7 @@ class IngredientsContainer extends React.Component {
                     <button className='display-sweet-ingredients' onClick={(e)=> {this.displayMore(e)}} name='sweetShowButton'>+</button></h3>
                     {this.state.sweetShowButton ? this.renderSweetIngredients() : null}
                 </div>
+                <CreateYourOwnIngredientContainer addSnackIngredient={this.props.addSnackIngredient} removeSnackIngredient={this.props.removeSnackIngredient} createSnackIngredient={this.props.createSnackIngredient}/>
             </div>
         )
     }
