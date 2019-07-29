@@ -20,8 +20,6 @@ class CreateYourOwnIngredientContainer extends React.Component {
     }
 
     updateNewIngredient = (indexNum, ingredientObj) => {
-        console.log('saved!')
-        debugger;
         let updatedIngredients = [...this.state.newIngredients]
         updatedIngredients[indexNum] = ingredientObj
         this.setState({
@@ -31,9 +29,10 @@ class CreateYourOwnIngredientContainer extends React.Component {
 
     removeNewIngredient = (indexNum) => {
         let currentIngredients = [...this.state.newIngredients]
-        let filteredIngredients = currentIngredients.filter((ingredient) => ingredient.name !== currentIngredients[indexNum].name)
+        let filteredIngredientsA = currentIngredients.slice(0,indexNum)
+        let filteredIngredientsB = currentIngredients.slice((indexNum+1))
         this.setState({
-            newIngredients: filteredIngredients
+            newIngredients: [...filteredIngredientsA, ...filteredIngredientsB]
         })
     }
 
@@ -45,6 +44,7 @@ class CreateYourOwnIngredientContainer extends React.Component {
         index={this.state.newIngredients.indexOf(timesToAdd)}
         saveCreatedIngredients={(ingredientObj) => this.saveCreatedIngredients(ingredientObj)} 
         addSnackIngredient={this.props.addSnackIngredient}
+        removeSnackIngredient={this.props.removeSnackIngredient}
         removeNewIngredient={(indexNum) => this.removeNewIngredient(indexNum)}
         updateNewIngredient={(indexNum, ingredientObj)=> this.updateNewIngredient(indexNum, ingredientObj)}/>}
     )
@@ -56,7 +56,11 @@ class CreateYourOwnIngredientContainer extends React.Component {
         this.setState({
             createdIngredients: currentIngredients
         })
-
+        this.props.addSnackIngredient(ingredientObj)
+        let ingredientNameAndType = {name: '', type:''}
+        ingredientNameAndType.name = ingredientObj.name
+        ingredientNameAndType.type= ingredientObj.type
+        this.props.createSnackIngredient(ingredientNameAndType)
     }
 
     render(){

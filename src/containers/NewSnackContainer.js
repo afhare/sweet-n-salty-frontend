@@ -7,6 +7,7 @@ class NewSnackContainer extends React.Component {
         super(props)
         this.state={
           mixes: [],
+          newIngredients: [],
           name: undefined,
           description: undefined,
           occasion: undefined
@@ -24,13 +25,17 @@ class NewSnackContainer extends React.Component {
     }
 
     createSnackIngredient = (ingredientObj) => {
-        //pass the name and type obj up to App to post new ingredient
+        this.setState({
+            newIngredients: [...this.state.newIngredients, ingredientObj]
+        })
     }
     
     removeSnackIngredient = (ingredientObj) => {
-        const filteredMixes = this.state.snackIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
+        const filteredMixes = this.state.mixes.filter((ingredient) => ingredient.name !== ingredientObj.name)
+        const filteredNewIngredients = this.state.newIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
         this.setState({
-            mixes: [...filteredMixes]
+            mixes: [...filteredMixes],
+            newIngredients: [...filteredNewIngredients]
         })
     }
 
