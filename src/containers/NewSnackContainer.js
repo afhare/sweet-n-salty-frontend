@@ -23,6 +23,10 @@ class NewSnackContainer extends React.Component {
         })
     }
 
+    createSnackIngredient = (ingredientObj) => {
+        //pass the name and type obj up to App to post new ingredient
+    }
+    
     removeSnackIngredient = (ingredientObj) => {
         const filteredMixes = this.state.snackIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
         this.setState({
@@ -74,9 +78,12 @@ class NewSnackContainer extends React.Component {
                     <br/>
                     <hr width='50%' />
                     <br />
-                    <IngredientsContainer checked={(ingredient) => this.checkAddedIngredients(ingredient)} saltyIngredients={saltyIngredients} sweetIngredients={sweetIngredients} addSnackIngredient={ this.addSnackIngredient} removeSnackIngredient={ this.removeSnackIngredient}/>
+                    <IngredientsContainer checked={(ingredient) => this.checkAddedIngredients(ingredient)} saltyIngredients={saltyIngredients} sweetIngredients={sweetIngredients} addSnackIngredient={ this.addSnackIngredient} removeSnackIngredient={ this.removeSnackIngredient} createSnackIngredient={(ingredientObj)=>this.createSnackIngredient(ingredientObj)}/>
                     <br />
                     <input type='submit'/>
+                    <br/>
+                    <br/>
+                    <br/>
                 </form>
             </div>
         )
