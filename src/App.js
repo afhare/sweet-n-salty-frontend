@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import NewSnackContainer from './containers/NewSnackContainer';
 import Register from './components/Register';
 import Login from './components/Login';
+import SnackViewContainer from './containers/SnackViewContainer';
 
 class App extends React.Component {
   constructor(){
@@ -142,7 +143,6 @@ class App extends React.Component {
         <button onClick={this.logoutUser}> Log Out</button>
         {localStorage.getItem("user") ?  <Redirect to='/new_snack' /> :<Redirect to='/login' />}
 
-
         <Route exact path="/login" render={(routeProps) => {
             return <Login {...routeProps} getUser={this.getUser}/>
           }} />
@@ -154,22 +154,10 @@ class App extends React.Component {
         <Route exact path="/new_snack" render={(routeProps) => {
             return <NewSnackContainer saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients} handleNewFormSubmit={this.handleNewFormSubmit}/>
           }} />
-
+        <SnackViewContainer snack={snack}/>
       </div>
     );
   }
 }
 
 export default App;
-// {this.state.user ? <NewSnackContainer saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients} handleNewFormSubmit={this.handleNewFormSubmit}/> :<UserFormContainer getUser={this.getUser}/>}
-// <Route path="/about" component={About} />
-// <Route path="/topics" component={Topics} />
-
-
-// <Route exact path="/login" render={(routeProps) => {
-//     return <UserFormContainer {...routeProps} getUser={this.getUser}/>
-//   }} />
-// import Login from './components/Login';
-// <Route exact path="/login" render={(routeProps) => {
-//     return <Login {...routeProps} getUser={this.getUser}/>
-//   }} />

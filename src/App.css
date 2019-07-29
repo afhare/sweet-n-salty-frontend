@@ -32,26 +32,41 @@
   }
 }
 
-.snack-ingredient{
+.snack-ingredient, .ingredient-list{
+  list-style-position: inside;
   list-style-type: none; 
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  padding: .5em 1em;
 }
 
 .sweet, .salty, .mixed {
   border-radius: 30px;
   padding: .5em;
+  margin: .5em;
+  text-align: center;
+  opacity: 0.8;
+  transition: 0.3s;
 }
 
+.sweet:hover {opacity: 1}
+.salty:hover {opacity: 1}
+.mixed:hover {opacity: 1}
+
 .sweet{
-  background: rgb(31, 9, 31);
+  background: rgb(46, 19, 46);
   color: white;
 }
 
 .salty {
-  background: rgb(247, 195, 100);
+  background: rgb(254, 212, 136);
   color: black;
 }
 
 .mixed {
-  background: rgb(14, 97, 14);
+  background: rgb(25, 50, 25);
   color: white;
 }
