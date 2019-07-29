@@ -47,13 +47,12 @@ class CheckboxIngredient extends React.Component {
             window.alert('Please select an amount and/or size to continue.')
         }
     }
-    
     render(){
         return (
             <label>
                 {this.props.ingredient.name}
                 <input name={this.props.ingredient.name} type='checkbox' checked={this.state.checked} onChange={this.handleCheckbox}/>
-                {this.state.checked && !this.state.confirmed ? 
+                {this.state.checked && !this.state.confirmed ?
                 <div className='ingredient-amount-selection'>
                 <label>Select an amount:  </label>
                     <br />
