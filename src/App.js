@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import NewSnackContainer from './containers/NewSnackContainer';
+import Register from './components/Register';
+import Login from './components/Login';
 import SnackViewContainer from './containers/SnackViewContainer';
 
 class App extends React.Component {
@@ -8,7 +11,8 @@ class App extends React.Component {
     super()
     this.state = {
       saltyIngredients: [],
-      sweetIngredients: []
+      sweetIngredients: [],
+      user: undefined
     }
   }
 
@@ -51,24 +55,20 @@ class App extends React.Component {
       this.setState({saltyIngredients, sweetIngredients})
     })
   }
+  getUser = (user) =>{
+    localStorage.setItem('user', user.jwt)
+    this.setState({user})
+    console.log(localStorage.getItem("user"))
+  }
+  logoutUser = () =>{
+    this.setState({user:undefined})
+    localStorage.removeItem("user")
+  }
   componentDidMount(){
-    this.fetchIngredients()
+      this.fetchIngredients()
   }
 
   render(){
-    // const saltyIngredients = [
-    //   {name: 'peanuts', type: 'salty'},
-    //   {name: 'pepitas', type: 'salty' },
-    //   {name: 'wasabi peas' , type: 'salty'},
-    //   {name: 'pretzels', type: 'salty' },
-    // ]
-    //
-    // const sweetIngredients = [
-    //   {name: 'raisins' , type: 'sweet'},
-    //   {name: 'chocolate chips', type: 'sweet'},
-    //   {name: 'dried cherries', type: 'sweet'},
-    //   {name: 'yogurt covered raisins', type: 'sweet'},
-    // ]
 
     const snack = {
       "id": 1,
@@ -140,9 +140,21 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <button onClick={this.logoutUser}> Log Out</button>
+        {localStorage.getItem("user") ?  <Redirect to='/new_snack' /> :<Redirect to='/login' />}
 
+        <Route exact path="/login" render={(routeProps) => {
+            return <Login {...routeProps} getUser={this.getUser}/>
+          }} />
+
+        <Route exact path="/register" render={(routeProps) => {
+            return <Register {...routeProps} getUser={this.getUser}/>
+          }} />
+
+        <Route exact path="/new_snack" render={(routeProps) => {
+            return <NewSnackContainer saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients} handleNewFormSubmit={this.handleNewFormSubmit}/>
+          }} />
         <SnackViewContainer snack={snack}/>
-        <NewSnackContainer saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients} handleNewFormSubmit={this.handleNewFormSubmit}/>
       </div>
     );
   }
