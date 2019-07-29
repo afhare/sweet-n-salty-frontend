@@ -9,7 +9,7 @@ class NewSnackContainer extends React.Component {
           mixes: [],
           name: undefined,
           description: undefined,
-          occasion: undefined  
+          occasion: undefined
         }
     }
 
@@ -22,7 +22,7 @@ class NewSnackContainer extends React.Component {
             mixes: [...this.state.mixes, ingredientObj]
         })
     }
-    
+
     removeSnackIngredient = (ingredientObj) => {
         const filteredMixes = this.state.snackIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
         this.setState({
@@ -59,6 +59,7 @@ class NewSnackContainer extends React.Component {
         const { saltyIngredients, sweetIngredients,handleNewFormSubmit } = this.props
         return (
             <div className='new-snack-form'>
+
                 <h2>Create a New Snack</h2>
                     {mixes.length > 0 ? this.renderAddedIngredients() : null }
                 <form onSubmit={(e) => {handleNewFormSubmit(e,this.state)}}>
