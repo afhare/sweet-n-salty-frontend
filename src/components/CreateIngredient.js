@@ -90,10 +90,27 @@ class CreateIngredient extends React.Component {
                 <option value='cup'> cup </option>
             </select>
             <br />
-            <button onClick={(e)=> this.confirmSnackIngredient(e)}>Confirm</button>
             <button onClick={(e)=> this.undoSnackIngredient(e)}>Undo</button>
+            <button onClick={(e)=> this.confirmSnackIngredient(e)}>Confirm</button>
         </div>
         )
+    }
+
+    discardNewIngredient = (e) => {
+        e.preventDefault();
+        let ingredientObj = {name: '', type: '', amount: ''}
+        ingredientObj.name = this.state.name
+        ingredientObj.type = this.state.type
+        ingredientObj.amount = `${this.state.amount} ${this.state.size}`
+        this.props.removeSnackIngredient(ingredientObj)
+        this.setState({
+            display: false,
+            name: '',
+            type: '',
+            amount: undefined,
+            size: undefined,
+            addToMix: false
+        })
     }
 
     render(){
@@ -107,7 +124,7 @@ class CreateIngredient extends React.Component {
                         <p>{this.state.name}</p>
                         <label>Sweet or Salty? </label>
                         <p>{this.state.type}</p>
-                        {this.addSizeAndAmountToIngredient()}
+                        {this.state.confirmed ? <button onClick={(e) => this.discardNewIngredient(e)}>Discard New Ingredient</button> : this.addSizeAndAmountToIngredient()}
                     </div> :
                     <div>
                         <br />
