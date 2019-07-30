@@ -17,13 +17,33 @@ export default {
     let reqObj = {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${localStorage.getItem("user")}`,
         'Content-Type':'application/json',
         'Accept':'application/json'
       },
       body: JSON.stringify(bodyObj)
     }
-
     return fetch(`${API_LINK}snacks`, reqObj).then(response => response.json())
   },
-
+  editSnack: (bodyObj, snackId) =>{
+    let reqObj = {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("user")}`,
+        'Content-Type':'application/json',
+        'Accept':'application/json'
+      },
+      body: JSON.stringify(bodyObj)
+    }
+    return fetch(`${API_LINK}snacks/${snackId}`, reqObj).then(response => response.json())
+  },
+  deleteSnack: (snackId) =>{
+    let reqObj = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("user")}`
+      }
+    }
+    return fetch(`${API_LINK}snacks/${snackId}`,reqObj).then(response => response.json())
+  },
 }

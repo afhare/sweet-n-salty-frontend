@@ -6,12 +6,13 @@ class EditSnackContainer extends React.Component {
     constructor(props){
         super(props)
         this.state={
+          snackId: props.snack.id,
           newIngredients: [],
           mixes: props.snack.mixes,
           mixIngredients: [],
           name: props.snack.name,
           description: props.snack.description,
-          occasion: props.snack.occasion  
+          occasion: props.snack.occasion
         }
     }
 
@@ -35,10 +36,9 @@ class EditSnackContainer extends React.Component {
         })
         }
     }
-    
+
     removeSnackIngredient = (ingredientObj) => {
-        const filteredMixes = this.state.mixes.filter((ingredient) => ingredient.ingredient.name !== ingredientObj.name)
-        debugger;
+        const filteredMixes = this.state.mixes.filter(mix => mix.ingredient.name !== ingredientObj.name)
         const filteredNewIngredients = this.state.newIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
         this.setState({
             mixes: [...filteredMixes],
@@ -69,15 +69,19 @@ class EditSnackContainer extends React.Component {
         })
     }
 
+    handleEditFormSubmit = (e, state) => {
+      this.props.handleEditFormSubmit(e,state)
+      this.props.history.push("/snacks")
+    }
 
     render(){
         const { mixes } = this.state
-        const { saltyIngredients, sweetIngredients,handleNewFormSubmit } = this.props
+        const { saltyIngredients, sweetIngredients,handleEditFormSubmit } = this.props
         return (
             <div className='edit-snack-form'>
                 <h2>Update Your Snack Mix</h2>
                 {mixes.length > 0 ? this.renderAddedIngredients() : null }
-                <form onSubmit={(e) => {handleNewFormSubmit(e,this.state)}}>
+                <form onSubmit={(e) => {this.handleEditFormSubmit(e,this.state)}}>
                     <label>Snack Name:</label><br/>
                     <input type='text'name='name'onChange={(e) => this.handleInputChange(e)} value={this.state.name}/><br/>
                     <br/>

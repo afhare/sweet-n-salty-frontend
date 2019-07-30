@@ -22,20 +22,21 @@ class SnackViewContainer extends React.Component {
         //return true (to display edit and delete buttons)
         //else return false (to display the save button)
         //does this need to live in app?
+
         return true
     }
 
     buttonRedirect = (e) => {
         e.preventDefault();
-        console.log(e.target.className)
+        // console.log(e.target.className)
         if (e.target.className === 'edit') {
-            // this.props.history.push('/edit')
+            this.props.history.push(`/snacks/${this.props.snack.id}/edit`)
+            // this.props.snack
         } else if (e.target.className === 'delete') {
-            this.props.history.push('/home')
-            window.alert(`${this.props.name} has been deleted from your pantry.`)
+            this.props.deleteSnack(this.props.snack.id)
+            this.props.history.push('/snacks')
         } else if (e.target.className === 'copy-save') {
             window.alert(`${this.props.name} has been added to your pantry.`)
-            //update the state to reflect that this snack is yours
         }
     }
 
