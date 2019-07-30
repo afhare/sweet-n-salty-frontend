@@ -1,13 +1,264 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Playfair+Display:700&display=swap');
+
 body{
   width: 100%;
   position: relative;
-
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+  font-size: 16pt;
+  background-image: url('./the-creative-exchange-pAnjPqQP0UQ-unsplash.jpg');
+  background-size: contain;
 }
+
 .App {
   text-align: center;
 }
 
-.App-logo {
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Playfair Display', sans-serif;
+}
+
+h1{
+  font-size: 22pt;
+}
+
+ul li {
+  padding: .5em 1em;
+}
+
+hr{
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+/* Snacks Styling */
+.snacks{
+  width: 90%;
+  margin: 0 auto;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  place-items:center;
+  place-content:space-around;
+  border: 1em solid rgba(238, 156, 168, 0.5);
+  border-radius: 3%;
+}
+.snack{
+  box-sizing: border-box;
+  width: 95%;
+  height: 95%;
+  display: inline;
+  padding: .5em;
+  margin: .75em;
+  border: .5em solid rgba(215,243,229,0.61);
+  border-radius: 10%;
+  transition: all .2s ease-in-out;
+  background: white;
+}
+
+.snack:hover{
+ transform: scale(1.05);
+}
+/* Snacks Styling End */
+
+/* Snack View Page Styling */
+.view-snack-container{
+  margin: 10em;
+  padding: 1.5em;
+  border-radius:15%;
+  border: 1em solid rgba(215,243,229,0.61);
+  background:rgba(250,250,250);
+}
+
+.view-snack-container > em {
+  font-family: 'Playfair Display', serif;
+  font-size: 17pt;
+  letter-spacing: 3px;
+}
+
+.sweet, .salty, .mixed {
+  border-radius: 30px;
+  padding: .5em;
+  margin: .5em;
+  text-align: center;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+  font-family: 'Playfair Display', serif;
+  font-size: 14pt;
+}
+
+.sweet:hover { opacity: .8; }
+.salty:hover { opacity: .8; }
+.mixed:hover { opacity: .8; }
+
+.sweet{
+  background:#EE9CA8;
+  color: black;
+}
+
+.salty {
+  background: #798BE2;
+  color: black;
+}
+
+.mixed {
+  background: #634974;
+  color: white;
+}
+
+.ingredient-list{
+  list-style-position: inside;
+  list-style-type: none;
+  margin: 4em;
+  padding: .5em;
+  border: .75em solid rgba(238, 156, 168, 0.5);
+  background: rgba(250,250,250);
+  display: inline-block;
+  text-align: center;
+  border-radius: 15%;
+  transition: all .2s ease-in-out;
+}
+
+.ingredient-list:hover{
+ transform: scale(1.2);
+}
+
+.ingredient-list li {
+  margin: 3em;
+  padding: .5em;
+  text-align: center;
+  font-size: 16pt;
+}
+
+/* Snack View Page Styling End */
+
+
+/* Button Styling */
+
+button {
+  height: 5em;
+  width:5em;
+	display: inline-block;
+	margin: 1em;
+  padding: .5em;
+  border-radius: 25%;
+	border: none;
+	background-color: rgba(121, 139, 226, 0.5);
+  color: inherit;
+  font-family: 'Playfair Display', serif;
+  font-size: 14pt;
+	position: relative;
+  z-index: 1;
+  transition: all .2s ease-in-out;
+  box-shadow: 0 5px 0 rgba(121, 139, 226, 0.85);
+  cursor: pointer;
+}
+
+button:focus {
+	outline-color: rgba(121, 139, 226, 0.85);
+}
+
+button:hover{
+ transform: scale(1.15);
+}
+
+button:active {
+  box-shadow: 0 2px 0 rgba(121, 139, 226, 0.85);
+  transform: translateY(3px);
+}
+
+/* Button Styling End */
+
+
+/* New Form Styling */
+.new-snack-form{
+  margin: 10em;
+  padding: 1.5em;
+  border-radius:15%;
+  border: 1em solid rgba(215,243,229,0.61);
+  background:rgba(250,250,250);
+}
+
+.new-snack-form input{
+  border-radius: 10%;
+  margin: .5em;
+  width: 30%;
+  height: 2em;
+  font-size: 18pt;
+}
+
+.new-snack-form textarea {
+  border-radius: 10%;
+  width: 30%;
+  height: 7em;
+  margin: .5em;
+  padding: .5em;
+  font-size: 18pt;
+}
+
+.new-snack-form > label {
+  font-family: 'Playfair Display', serif;
+  font-size: 17pt;
+  letter-spacing: 3px;
+}
+
+.display-sweet-ingredients, .display-salty-ingredients {
+  height: 3em;
+  width: 3em;
+}
+
+.ingredient-name-and-checkbox {
+  padding: 0px;
+  height: 3em;
+}
+.snack-ingredient{
+  list-style-position: inside;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ingredient-amount-selection {
+  text-align: center !important;
+}
+
+.sweet-ingredients, .salty-ingredients{
+  margin: 1em;
+}
+.ingredient-row {
+  width: 42%;
+  margin: 0 auto;
+  padding: 2em;
+}
+.ingredient-row label {
+  float: left;
+  font-weight: 700;
+}
+.ingredient-row input {
+  padding-top: 0px;
+  margin: 0;
+  margin-top: -10px;
+  float: right;
+}
+
+.create-own-ingredient{
+  margin: 2em;
+  border: .75em solid rgba(215,243,229,0.61);
+  background: rgba(250,250,250);
+  display: inline-block;
+  text-align: center;
+  border-radius: 18%;
+  transition: all .2s ease-in-out;
+}
+
+.create-own-ingredient:hover{
+ transform: scale(1.2);
+}
+
+
+/* Form Styling End */
+
+/* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
@@ -35,64 +286,10 @@ body{
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
-.snack-ingredient, .ingredient-list{
-  list-style-position: inside;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+/* <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@charlesdeluvio?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Charles 🇵🇭"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Charles 🇵🇭</span></a> */
 
-ul li {
-  padding: .5em 1em;
-}
+/* <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@creativeexchange?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from The Creative Exchange"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">The Creative Exchange</span></a> */
 
-.sweet, .salty, .mixed {
-  border-radius: 30px;
-  padding: .5em;
-  margin: .5em;
-  text-align: center;
-  opacity: 0.8;
-  transition: 0.3s;
-}
-
-.sweet:hover {opacity: 1}
-.salty:hover {opacity: 1}
-.mixed:hover {opacity: 1}
-
-.sweet{
-  background: rgb(46, 19, 46);
-  color: white;
-}
-
-.salty {
-  background: rgb(254, 212, 136);
-  color: black;
-}
-
-.mixed {
-  background: rgb(25, 50, 25);
-  color: white;
-}
-
-
-/* Snacks Styling */
-.snacks{
-  width: 90%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  place-items:center;
-  place-content:space-around;
-}
-.snack{
-  box-sizing: border-box;
-  width: 95%;
-  height: 95%;
-  display: inline;
-  padding: .5em;
-  margin: .5em;
-  border: .1em solid black;
-}
-/* Snacks Styling End */
+/* <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@maksimshutov?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Maksim Shutov"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Maksim Shutov</span></a> */
