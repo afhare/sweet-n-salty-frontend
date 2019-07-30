@@ -6,27 +6,43 @@ class EditSnackContainer extends React.Component {
     constructor(props){
         super(props)
         this.state={
+          newIngredients: [],
           mixes: props.snack.mixes,
+          mixIngredients: [],
           name: props.snack.name,
           description: props.snack.description,
           occasion: props.snack.occasion  
         }
     }
 
-    checkAddedIngredients = (ingredient) => {
-        return this.state.mixes.includes(ingredient)
+    checkAddedIngredients = (ingredientName) => {
+        let ingredients = this.props.snack.mixes.map(snackIngredient => snackIngredient.ingredient.name)
+        return ingredients.includes(ingredientName)
     }
 
     addSnackIngredient = (ingredientObj) => {
+        let currentIngredients = this.state.mixes.map(mix => mix.ingredient.name)
+        if (currentIngredients.includes(ingredientObj.name)){
+            let index = currentIngredients.indexOf(ingredientObj.name)
+            let newMixes = this.state.mixes
+            newMixes[index] = ingredientObj
+            this.setState({
+                mixes: newMixes
+            })
+        } else {
         this.setState({
             mixes: [...this.state.mixes, ingredientObj]
         })
+        }
     }
     
     removeSnackIngredient = (ingredientObj) => {
-        const filteredMixes = this.state.snackIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
+        const filteredMixes = this.state.mixes.filter((ingredient) => ingredient.ingredient.name !== ingredientObj.name)
+        debugger;
+        const filteredNewIngredients = this.state.newIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
         this.setState({
-            mixes: [...filteredMixes]
+            mixes: [...filteredMixes],
+            newIngredients: [...filteredNewIngredients]
         })
     }
 
@@ -58,28 +74,31 @@ class EditSnackContainer extends React.Component {
         const { mixes } = this.state
         const { saltyIngredients, sweetIngredients,handleNewFormSubmit } = this.props
         return (
-            <div className='new-snack-form'>
-                <h2>Create a New Snack</h2>
-                    {mixes.length > 0 ? this.renderAddedIngredients() : null }
+            <div className='edit-snack-form'>
+                <h2>Update Your Snack Mix</h2>
+                {mixes.length > 0 ? this.renderAddedIngredients() : null }
                 <form onSubmit={(e) => {handleNewFormSubmit(e,this.state)}}>
                     <label>Snack Name:</label><br/>
-                    <input type='text'name='name'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <input type='text'name='name'onChange={(e) => this.handleInputChange(e)} value={this.state.name}/><br/>
                     <br/>
                     <label>Snack Description:</label><br/>
-                    <textarea name='description' rows='4' cols='30' onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <textarea name='description' rows='4' cols='30'onChange={(e) => this.handleInputChange(e)} value={this.state.description}/><br/>
                     <label>This Snack Is Perfect For:</label><br/>
-                    <input type='text'name='occasion'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <input type='text'name='occasion' onChange={(e) => this.handleInputChange(e)} value={this.state.occasion}/><br/>
                     <br/>
                     <br/>
                     <hr width='50%' />
                     <br />
-                    <IngredientsContainer checked={(ingredient) => this.checkAddedIngredients(ingredient)} saltyIngredients={saltyIngredients} sweetIngredients={sweetIngredients} addSnackIngredient={ this.addSnackIngredient} removeSnackIngredient={ this.removeSnackIngredient}/>
+                    <IngredientsContainer checked={this.checkAddedIngredients} amount={()=>this.collectIngredientAmounts()} saltyIngredients={saltyIngredients} sweetIngredients={sweetIngredients} addSnackIngredient={ this.addSnackIngredient} removeSnackIngredient={ this.removeSnackIngredient} createSnackIngredient={(ingredientObj)=>this.createSnackIngredient(ingredientObj)}/>
                     <br />
                     <input type='submit'/>
+                    <br/>
+                    <br/>
+                    <br/>
                 </form>
             </div>
         )
     }
 }
 
-export default NewSnackContainer
+export default EditSnackContainer
