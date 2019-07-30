@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import NewSnackContainer from './containers/NewSnackContainer';
+import SnacksContainer from './containers/SnacksContainer';
 import Register from './components/Register';
 import Login from './components/Login';
 import SnackViewContainer from './containers/SnackViewContainer';
+import Api from './services/api';
 
 class App extends React.Component {
   constructor(){
@@ -12,17 +14,17 @@ class App extends React.Component {
     this.state = {
       saltyIngredients: [],
       sweetIngredients: [],
+      snack: undefined,
+      snacks:[],
       user: undefined
     }
   }
 
   handleNewFormSubmit = (e,snackMixObj) => {
     e.preventDefault();
-    // console.log(snackMixObj)
     snackMixObj.mixes.forEach((mix)=>{
        mix.type_of_ingredient = mix.type
     })
-    // console.log(ingredientsAttributes);
     const bodyObj = {
       name:snackMixObj.name,
       description:snackMixObj.description,
@@ -32,21 +34,15 @@ class App extends React.Component {
       mixes_attributes: snackMixObj.mixes,
     }
 
-    let reqObj = {
-      method: 'POST',
-      headers: {
-        'Content-Type':'application/json',
-        'Accept':'application/json'
-      },
-      body: JSON.stringify(bodyObj)
-    }
-
-    fetch("http://localhost:3000/snacks", reqObj).then(response => response.json()).then(data => console.log(data))
+    Api.newSnack(bodyObj)
+    .then(data => console.log(data))
   }
-
-  fetchIngredients= () =>{
-    fetch("http://localhost:3000/ingredients")
-    .then(resp => resp.json())
+  getSnacks = () => {
+    Api.fetchSnacks()
+    .then(snacks => this.setState({snacks}))
+  }
+  getIngredients= () =>{
+    Api.fetchIngredients()
     .then(ingredients => {
       const saltyIngredients = ingredients.filter((ingredient) => ingredient.type_of_ingredient === "salty")
 
@@ -55,6 +51,15 @@ class App extends React.Component {
       this.setState({saltyIngredients, sweetIngredients})
     })
   }
+  getSnack = (snack)=>{
+    // Api.getSnack(snackId)
+    // .then((snack) => {
+    //   this.setState({snack})
+    //  // return <Redirect to={`/snacks/${snackId}`}/>
+    // })
+    this.setState({snack}, console.log(this.state.snack))
+  }
+
   getUser = (user) =>{
     localStorage.setItem('user', user.jwt)
     this.setState({user})
@@ -65,7 +70,7 @@ class App extends React.Component {
     localStorage.removeItem("user")
   }
   componentDidMount(){
-      this.fetchIngredients()
+      this.getIngredients()
   }
 
   render(){
@@ -141,7 +146,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <button onClick={this.logoutUser}> Log Out</button>
-        {localStorage.getItem("user") ?  <Redirect to='/new_snack' /> :<Redirect to='/login' />}
+        {localStorage.getItem("user") ?  <Redirect to='/snacks' /> :<Redirect to='/login' />}
 
         <Route exact path="/login" render={(routeProps) => {
             return <Login {...routeProps} getUser={this.getUser}/>
@@ -152,12 +157,24 @@ class App extends React.Component {
           }} />
 
         <Route exact path="/new_snack" render={(routeProps) => {
-            return <NewSnackContainer saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients} handleNewFormSubmit={this.handleNewFormSubmit}/>
+            return <NewSnackContainer {...routeProps} saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients} handleNewFormSubmit={this.handleNewFormSubmit}/>
           }} />
-        <SnackViewContainer snack={snack}/>
+
+        <Route exact path="/snacks" render={(routeProps) => {
+            return <SnacksContainer {...routeProps}  getSnacks={this.getSnacks} snacks={this.state.snacks} getSnack={this.getSnack} />
+          }} />
+
+        <Route exact path="/snacks/:id" render={(routeProps) => {
+            return <SnackViewContainer {...routeProps} snack={this.state.snack}/>
+          }} />
       </div>
     );
   }
 }
-
+// <Route exact path="/snacks/:id" render={(routeProps) => {
+//     return <SnackViewContainer {...routeProps} snack={this.state.snack}/>
+//   }} />
+// <SnackViewContainer snack={snack}/>
 export default App;
+//  getSnack={this.getSnack}
+// snack={this.state.snack}

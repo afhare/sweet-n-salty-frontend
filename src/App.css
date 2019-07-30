@@ -1,3 +1,8 @@
+body{
+  width: 100%;
+  position: relative;
+
+}
 .App {
   text-align: center;
 }
@@ -34,7 +39,7 @@
 
 .snack-ingredient, .ingredient-list{
   list-style-position: inside;
-  list-style-type: none; 
+  list-style-type: none;
   padding: 0;
   margin: 0;
 }
@@ -70,3 +75,24 @@ ul li {
   background: rgb(25, 50, 25);
   color: white;
 }
+
+
+/* Snacks Styling */
+.snacks{
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  place-items:center;
+  place-content:space-around;
+}
+.snack{
+  box-sizing: border-box;
+  width: 95%;
+  height: 95%;
+  display: inline;
+  padding: .5em;
+  margin: .5em;
+  border: .1em solid black;
+}
+/* Snacks Styling End */
