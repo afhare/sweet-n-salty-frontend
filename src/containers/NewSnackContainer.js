@@ -29,7 +29,7 @@ class NewSnackContainer extends React.Component {
             newIngredients: [...this.state.newIngredients, ingredientObj]
         })
     }
-    
+
     removeSnackIngredient = (ingredientObj) => {
         const filteredMixes = this.state.mixes.filter((ingredient) => ingredient.name !== ingredientObj.name)
         const filteredNewIngredients = this.state.newIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
@@ -62,7 +62,10 @@ class NewSnackContainer extends React.Component {
         })
     }
 
-
+  handleNewFormSubmit = (e, state) => {
+    this.props.handleNewFormSubmit(e, state)
+    this.props.history.push("/snacks")
+  }
     render(){
         const { mixes } = this.state
         const { saltyIngredients, sweetIngredients,handleNewFormSubmit } = this.props
@@ -71,14 +74,14 @@ class NewSnackContainer extends React.Component {
 
                 <h2>Create a New Snack</h2>
                     {mixes.length > 0 ? this.renderAddedIngredients() : null }
-                <form onSubmit={(e) => {handleNewFormSubmit(e,this.state)}}>
+                <form onSubmit={(e) => {this.handleNewFormSubmit(e,this.state)}}>
                     <label>Snack Name:</label><br/>
-                    <input type='text'name='name'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <input required type='text'name='name'onChange={(e) => this.handleInputChange(e)}/><br/>
                     <br/>
                     <label>Snack Description:</label><br/>
-                    <textarea name='description' rows='4' cols='30'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <textarea required name='description' rows='4' cols='30'onChange={(e) => this.handleInputChange(e)}/><br/>
                     <label>This Snack Is Perfect For:</label><br/>
-                    <input type='text'name='occasion'onChange={(e) => this.handleInputChange(e)}/><br/>
+                    <input required type='text'name='occasion'onChange={(e) => this.handleInputChange(e)}/><br/>
                     <br/>
                     <br/>
                     <hr width='50%' />
