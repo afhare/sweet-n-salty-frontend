@@ -41,7 +41,7 @@ class SnackViewContainer extends React.Component {
 
     renderSnackIngredients = () => {
         return this.props.snack.mixes.map((ingredient) => {
-            return <SnackIngredient ingredient={ingredient} key={ingredient.name}/>
+            return <SnackIngredient ingredient={ingredient} key={this.props.snack.mixes.indexOf(ingredient)}/>
         })
     }
 

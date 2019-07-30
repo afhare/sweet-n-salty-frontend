@@ -8,9 +8,13 @@ class CheckboxIngredient extends React.Component {
             type: this.props.type,
             amount: undefined,
             size: undefined,
-            checked: false,
-            confirmed: false
+            checked: this.props.checked,
+            confirmed: this.props.checked
         }
+    }
+
+    componentDidMount(){
+        console.log(this.props)
     }
 
     handleCheckbox = () => {

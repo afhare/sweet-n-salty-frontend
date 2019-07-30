@@ -7,6 +7,7 @@ class NewSnackContainer extends React.Component {
         super(props)
         this.state={
           mixes: [],
+          newIngredients: [],
           name: undefined,
           description: undefined,
           occasion: undefined
@@ -23,10 +24,18 @@ class NewSnackContainer extends React.Component {
         })
     }
 
-    removeSnackIngredient = (ingredientObj) => {
-        const filteredMixes = this.state.snackIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
+    createSnackIngredient = (ingredientObj) => {
         this.setState({
-            mixes: [...filteredMixes]
+            newIngredients: [...this.state.newIngredients, ingredientObj]
+        })
+    }
+    
+    removeSnackIngredient = (ingredientObj) => {
+        const filteredMixes = this.state.mixes.filter((ingredient) => ingredient.name !== ingredientObj.name)
+        const filteredNewIngredients = this.state.newIngredients.filter((ingredient) => ingredient.name !== ingredientObj.name)
+        this.setState({
+            mixes: [...filteredMixes],
+            newIngredients: [...filteredNewIngredients]
         })
     }
 
@@ -74,9 +83,12 @@ class NewSnackContainer extends React.Component {
                     <br/>
                     <hr width='50%' />
                     <br />
-                    <IngredientsContainer checked={(ingredient) => this.checkAddedIngredients(ingredient)} saltyIngredients={saltyIngredients} sweetIngredients={sweetIngredients} addSnackIngredient={ this.addSnackIngredient} removeSnackIngredient={ this.removeSnackIngredient}/>
+                    <IngredientsContainer checked={(ingredient) => this.checkAddedIngredients(ingredient)} saltyIngredients={saltyIngredients} sweetIngredients={sweetIngredients} addSnackIngredient={ this.addSnackIngredient} removeSnackIngredient={ this.removeSnackIngredient} createSnackIngredient={(ingredientObj)=>this.createSnackIngredient(ingredientObj)}/>
                     <br />
                     <input type='submit'/>
+                    <br/>
+                    <br/>
+                    <br/>
                 </form>
             </div>
         )
