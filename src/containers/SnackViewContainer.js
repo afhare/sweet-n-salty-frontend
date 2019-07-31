@@ -2,22 +2,15 @@ import React from 'react'
 import SnackIngredient from '../components/SnackIngredient'
 import SweetOrSalty from '../components/SweetOrSalty';
 import Api from '../services/api';
+import { Link } from 'react-router-dom';
 
 class SnackViewContainer extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-          snack: this.props.snack,
-          owner: this.props.snack ? this.props.snack.user.username : null
-        }
-        // if(!this.state.snack ){
-        //   Api.getSnack(this.props.match.params.id)
-        //   .then(snack => this.setState({snack}))
-        // }
+        this.getSnack()
+
     }
-// ,
-// owner: this.props.snack.user.username
-    snackCreator = () => {
+        snackCreator = () => {
         //compare the snack's user with the token--if they match
         //return true (to display edit and delete buttons)
         //else return false (to display the save button)
@@ -58,12 +51,17 @@ class SnackViewContainer extends React.Component {
             return <SweetOrSalty type='mixed' />
           }
     }
-
+    getSnack = () => {
+          Api.getSnack(this.props.match.params.id)
+          .then(snack => {
+            this.props.getSnack(snack)
+        })
+        return ""
+    }
     render(){
         return (
-
             <div className='view-snack-container'>
-              <h2>{this.props.snack ? `${this.state.owner}'s Pantry`: 'The Snack Pantry'}</h2>
+              <h2>{this.props.snack ? `${this.props.snack.user.username}'s Pantry` : null}'s Pantry</h2>
                <h3>{this.props.snack ? this.props.snack.name : null}</h3>
                <br />
                {this.props.snack ? this.sweetOrSalty(): null}
@@ -91,6 +89,4 @@ class SnackViewContainer extends React.Component {
         )
     }
 }
-
 export default SnackViewContainer
-//                <p>{this.state.owner}'s Pantry</p>

@@ -9,7 +9,8 @@ body{
   background-image: url('./the-creative-exchange-pAnjPqQP0UQ-unsplash.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: fixed;
+  /* background-position: center; */
+  background-attachment: fixed;
 }
 
 .App {
@@ -31,9 +32,9 @@ hr{
 
 /* NavBar Styling */
 .nav-bar{
-  margin: 1em;
+  margin: 1em auto;
   padding: 1.2em .5em .7em .5em;
-  width: 30%;
+  width: 45%;
   background-color: rgba(250, 250, 250, 0.8);
   border: 7px solid rgba(99, 73, 116, .5);
   border-radius: 25%;
@@ -41,6 +42,7 @@ hr{
 
 .navLogo > img{
   transition: all .2s ease-in-out;
+  width: 100%;
 }
 .navLogo > img:hover{
   transform: scale(1.15);
@@ -70,6 +72,11 @@ hr{
   border-radius: 10%;
   transition: all .2s ease-in-out;
   background: white;
+  position: relative;
+}
+
+.last-child{
+  margin-bottom: 2.5em;
 }
 
 .snack:hover{
@@ -79,7 +86,7 @@ hr{
 
 /* Snack View Page Styling */
 .view-snack-container{
-  margin: 10em;
+  margin: 2.5em  10em;
   padding: 1.5em;
   border-radius:15%;
   border: 1em solid rgba(215,243,229,0.61);
@@ -151,11 +158,12 @@ hr{
 
 /* Button Styling */
 
-button {
+button,
+.fake-button {
   height: 5em;
   width:5em;
 	display: inline-block;
-	margin: 1em;
+	margin:  1em ;
   padding: .5em;
   border-radius: 25%;
 	border: none;
@@ -169,7 +177,14 @@ button {
   box-shadow: 0 5px 0 rgba(121, 139, 226, 0.85);
   cursor: pointer;
 }
-
+.fake-button {
+  text-decoration: none;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2.5em;
+}
 button:focus {
 	outline-color: rgba(121, 139, 226, 0.85);
 }
@@ -184,8 +199,6 @@ button:active {
 }
 
 .button {
-  height: 2.7em;
-  width:2.7em;
 	display: inline-block;
 	margin: .5em;
   padding: .5em;
@@ -200,19 +213,19 @@ button:active {
   transition: all .2s ease-in-out;
   box-shadow: 0 5px 0 rgba(121, 139, 226, 0.85);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .button:hover{
   transform: scale(1.15);
  }
- 
+
  .button:active {
    box-shadow: 0 2px 0 rgba(121, 139, 226, 0.85);
    transform: translateY(3px);
  }
 
 /* Button Styling End */
-
 
 /* Login Form Styling */
 .login-form{
@@ -259,7 +272,7 @@ button:active {
 .login-form input[type='submit']:hover{
   transform: scale(1.15);
  }
- 
+
  .login-form input[type='submit']:active {
    box-shadow: 0 2px 0 rgba(121, 139, 226, 0.85);
    transform: translateY(3px);
@@ -278,7 +291,7 @@ button:active {
 
 /* Snack Form Styling */
 .new-snack-form, .edit-snack-form{
-  margin: 10em;
+  margin: 2.5em 10em;
   padding: 1.5em;
   border-radius:15%;
   border: 1em solid rgba(215,243,229,0.61);
