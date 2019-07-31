@@ -124,7 +124,7 @@ class CreateIngredient extends React.Component {
                         <p>{this.state.name}</p>
                         <label>Sweet or Salty? </label>
                         <p>{this.state.type}</p>
-                        {this.state.confirmed ? <button onClick={(e) => this.discardNewIngredient(e)}>Discard New Ingredient</button> : this.addSizeAndAmountToIngredient()}
+                        {this.state.confirmed ? <button onClick={(e) => this.discardNewIngredient(e)}>Discard</button> : this.addSizeAndAmountToIngredient()}
                     </div> :
                     <div>
                         <br />
@@ -139,7 +139,7 @@ class CreateIngredient extends React.Component {
                             <option value='salty'> Salty </option>
                         </select>
                         <br/>
-                        <button onClick={(e)=> this.handleNewIngredient(e)}>Continue to Add Ingredient to Snack Mix</button>
+                        <button onClick={(e)=> this.handleNewIngredient(e)}>Continue</button>
                     </div>
                 }
                     <hr width='20%'/>
