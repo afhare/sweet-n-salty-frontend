@@ -28,6 +28,7 @@ class App extends React.Component {
     snackMixObj.mixes.forEach((mix)=>{
        mix.type_of_ingredient = mix.type
     })
+
     const bodyObj ={
       snack: {
         name:snackMixObj.name,
@@ -48,12 +49,21 @@ class App extends React.Component {
     snackMixObj.mixes.forEach((mix)=>{
        mix.type_of_ingredient = mix.type
     })
+
+    const ingredientsAttributes = snackMixObj.mixes.map(mix => {
+      return {
+        amount: mix.amount,
+        name: mix.ingredient ? mix.ingredient.name : mix.name,
+        ["type_of_ingredient"]: mix["type_of_ingredient"]
+      }
+    })
+
     const bodyObj ={
       snack: {
         name:snackMixObj.name,
         description:snackMixObj.description,
         occasion:snackMixObj.occasion,
-        ingredients_attributes: snackMixObj.mixes,
+        ingredients_attributes: ingredientsAttributes,
         mixes_attributes: snackMixObj.mixes
       }
     }
@@ -110,12 +120,8 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-      {localStorage.getItem("user") ?  <Redirect to='/snacks' /> :<Redirect to='/login' />}
-        <Navbar
-          user={this.state.user}
-          handleLogout={() => this.logoutUser()}
-        />
-        <Link to="/new_snack">HAIL</Link>
+      {localStorage.getItem("user") ? <Navbar user={this.state.user} handleLogout={() => this.logoutUser()}/>  :<Redirect to='/login' />}
+
         <Switch>
           <Route exact path='/' component={About}/>
           <Route exact path="/login" render={(routeProps) => {
@@ -147,8 +153,5 @@ class App extends React.Component {
     );
   }
 }
-// <Route exact path="/snacks/:id" render={(routeProps) => {
-//     return <SnackViewContainer {...routeProps} snack={this.state.snack}/>
-//   }} />
-// <SnackViewContainer snack={snack}/>
+
 export default App;

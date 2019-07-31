@@ -8,8 +8,8 @@ class Snack extends React.Component {
         <h2>{this.props.snack.name}</h2>
         <p>By: {this.props.snack.user.username}</p>
         <p>Description: {this.props.snack.description}</p>
-        <p>Occasion: {this.props.snack.occasion}</p>
-        <Link to={{pathname:`/snacks/${this.props.snack.id}`, snack: this.props.snack }}> See More</Link>
+        <p className="last-child">Occasion: {this.props.snack.occasion}</p>
+        <Link className="fake-button" to={{pathname:`/snacks/${this.props.snack.id}`, snack: this.props.snack }}> See More</Link>
       </div>
     )
   }

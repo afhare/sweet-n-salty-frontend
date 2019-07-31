@@ -11,24 +11,18 @@ const Navbar = props => {
             </Link>
         </div>
       <div>
-      <Link to="/snacks" className="item">
-            <div className="button">Snack Index</div>
-        </Link>
-        <Link to="/new_snacks" className="item">
-            <div className="button">New Snack</div>
-        </Link>
+      <Link to="/snacks" className="button">Snack Index</Link>
+        <Link to="/new_snack" className="button">New Snack</Link>
         {
-          props.user ? 
-            <a className="item" onClick={() => {
+          localStorage.getItem("user") ?
+            <a onClick={() => {
               props.handleLogout()
               props.history.push('/login')
             }}>
             <div className="button">Log out</div>
           </a>
           :
-          <Link to="/login" className="item">
-            <div className="button">Sign In</div>
-          </Link>
+          <Link to="/login" className="button">Sign In</Link>
         }
       </div>
     </div>

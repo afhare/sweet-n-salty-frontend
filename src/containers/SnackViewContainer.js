@@ -7,10 +7,7 @@ import { Link } from 'react-router-dom';
 class SnackViewContainer extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-          snack: this.getSnack(),
-          owner: this.props.snack ? this.props.snack.user.username : null
-        }
+        this.getSnack()
 
     }
         snackCreator = () => {
@@ -80,8 +77,6 @@ class SnackViewContainer extends React.Component {
                {this.snackCreator() ?
                <div className='userSnackDashboard'>
                 <button className='edit' onClick={(e) => this.buttonRedirect(e)}>Edit This Snack</button>
-                <Link className='edit' to={{pathname:`/snacks/${this.props.snack ? this.props.snack.id: null}/edit`, snack: this.props.snack }}> Edit</Link>
-
                 <button className='delete' onClick={(e) => this.buttonRedirect(e)}>Delete This Snack</button>
                </div>
                :

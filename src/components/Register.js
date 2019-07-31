@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import logo from '../logo-complete.svg'
 
 class Register extends React.Component {
   constructor(props){
@@ -46,8 +47,12 @@ class Register extends React.Component {
   }
   render(){
     return (
-    <div>
+    <div className='login-form'>
+
       <form onSubmit={this.handleSubmit}>
+      {localStorage.getItem("user") ?  <Redirect to='/' /> : null}
+      <img src={logo} alt='Sweet and Salty Snacks' />
+
         <h1>Register</h1>
           <label>Username: </label>
           <input onChange={this.handleChange} type="text" name="username" value={this.state.username}/>
