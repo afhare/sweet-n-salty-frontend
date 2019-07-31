@@ -42,7 +42,7 @@ class NewSnackContainer extends React.Component {
     renderAddedIngredients = () => {
         return(
             <div>
-                <label>Currently Added Snack Ingredients:</label>
+                <label>Snack Preview:</label>
                 <ul className='snack-ingredient'>
                     {this.displayIngredientsInProgress()}
                 </ul>
@@ -52,7 +52,7 @@ class NewSnackContainer extends React.Component {
 
     displayIngredientsInProgress = () => {
         return this.state.mixes.map((ingredient) => {
-            return <SnackIngredient ingredient={ingredient}/>
+            return <SnackIngredient ingredient={ingredient} key={ingredient.id}/>
         })
     }
 

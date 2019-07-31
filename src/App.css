@@ -7,7 +7,9 @@ body{
   background-color: #ffffff;
   font-size: 16pt;
   background-image: url('./the-creative-exchange-pAnjPqQP0UQ-unsplash.jpg');
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: fixed;
 }
 
 .App {
@@ -170,8 +172,8 @@ button:active {
 /* Button Styling End */
 
 
-/* New Form Styling */
-.new-snack-form{
+/* Form Styling */
+.new-snack-form, .edit-snack-form{
   margin: 10em;
   padding: 1.5em;
   border-radius:15%;
@@ -202,6 +204,23 @@ button:active {
   letter-spacing: 3px;
 }
 
+.edit-snack-form input{
+  border-radius: 10%;
+  margin: .5em;
+  width: 30%;
+  height: 2em;
+  font-size: 18pt;
+}
+
+.edit-snack-form textarea {
+  border-radius: 10%;
+  width: 30%;
+  height: 7em;
+  margin: .5em;
+  padding: .5em;
+  font-size: 18pt;
+}
+
 .display-sweet-ingredients, .display-salty-ingredients {
   height: 3em;
   width: 3em;
@@ -230,8 +249,12 @@ button:active {
   margin: 0 auto;
   padding: 2em;
 }
-.ingredient-row label {
+.ingredient-name-and-checkbox label {
   float: left;
+  font-weight: 500;
+}
+.ingredient-name-and-checkbox input {
+  float: right;
   font-weight: 700;
 }
 .ingredient-row input {
@@ -248,14 +271,13 @@ button:active {
   display: inline-block;
   text-align: center;
   border-radius: 18%;
-  transition: all .2s ease-in-out;
 }
 
-.create-own-ingredient:hover{
- transform: scale(1.2);
+.add-ingredient{
+  height: 3.5em;
+  width: 8em;
+  padding: .5em;
 }
-
-
 /* Form Styling End */
 
 /* .App-logo {

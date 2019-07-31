@@ -70,7 +70,7 @@ class CreateYourOwnIngredientContainer extends React.Component {
                 <p>Contribute to our ingredients register and add your own!</p>
                 <em>Note: This added ingredient will only be added to the register after submitting this snack.</em>
                 <br/>
-                <button onClick={(e) => this.initiateNewIngredient(e)}>Add a New Ingredient</button>
+                <button className='add-ingredient' onClick={(e) => this.initiateNewIngredient(e)}>Add a New Ingredient</button>
                 <br/>
                 {this.state.newIngredients.length > 0 ? this.createNewIngredient() : null}
             </div>
