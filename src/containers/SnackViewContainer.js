@@ -64,7 +64,7 @@ class SnackViewContainer extends React.Component {
     render(){
         return (
             <div className='view-snack-container'>
-              <p>{this.props.snack ? this.props.snack.user.username : null}'s Pantry</p>
+              <h2>{this.props.snack ? `${this.props.snack.user.username}'s Pantry` : null}'s Pantry</h2>
                <h3>{this.props.snack ? this.props.snack.name : null}</h3>
                <br />
                {this.props.snack ? this.sweetOrSalty(): null}

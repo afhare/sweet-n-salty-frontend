@@ -8,6 +8,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import SnackViewContainer from './containers/SnackViewContainer';
 import Api from './services/api';
+import Navbar from './components/NavBar';
+import About from './components/About'
 
 class App extends React.Component {
   constructor(props){
@@ -108,11 +110,14 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <button onClick={this.logoutUser}> Log Out</button>
-        {localStorage.getItem("user") ?  <Redirect to='/snacks/7' /> :<Redirect to='/login' />}
+      {localStorage.getItem("user") ?  <Redirect to='/snacks' /> :<Redirect to='/login' />}
+        <Navbar
+          user={this.state.user}
+          handleLogout={() => this.logoutUser()}
+        />
         <Link to="/new_snack">HAIL</Link>
-
         <Switch>
+          <Route exact path='/' component={About}/>
           <Route exact path="/login" render={(routeProps) => {
               return <Login {...routeProps} getUser={this.getUser}/>
             }} />
