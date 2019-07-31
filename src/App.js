@@ -78,12 +78,7 @@ class App extends React.Component {
     })
   }
   getSnack = (snack)=>{
-    // Api.getSnack(snackId)
-    // .then((snack) => {
-    //   this.setState({snack})
-    //  // return <Redirect to={`/snacks/${snackId}`}/>
-    // })
-    this.setState({snack})
+    this.setState({snack: snack})
   }
 
   deleteSnack= (snackId)  =>{
@@ -114,7 +109,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <button onClick={this.logoutUser}> Log Out</button>
-        {localStorage.getItem("user") ?  <Redirect to='/snacks' /> :<Redirect to='/login' />}
+        {localStorage.getItem("user") ?  <Redirect to='/snacks/7' /> :<Redirect to='/login' />}
         <Link to="/new_snack">HAIL</Link>
 
         <Switch>
@@ -134,11 +129,13 @@ class App extends React.Component {
             }} />
 
           <Route exact path="/snacks/:id" render={(routeProps) => {
-              return <SnackViewContainer {...routeProps} snack={this.state.snack} deleteSnack={this.deleteSnack}/>
+              return <SnackViewContainer {...routeProps} snack={this.state.snack} deleteSnack={this.deleteSnack} getSnack={this.getSnack}/>
             }} />
 
           <Route exact path="/snacks/:id/edit" render={(routeProps) => {
-              return <EditSnackContainer {...routeProps} snack={this.state.snack} handleEditFormSubmit={this.handleEditFormSubmit}  saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients}/>
+              return <EditSnackContainer {...routeProps} snack={this.state.snack} handleEditFormSubmit={this.handleEditFormSubmit}  saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients}
+              getSnack={this.getSnack}
+              />
             }} />
         </Switch>
       </div>
@@ -150,5 +147,3 @@ class App extends React.Component {
 //   }} />
 // <SnackViewContainer snack={snack}/>
 export default App;
-//  getSnack={this.getSnack}
-// snack={this.state.snack}

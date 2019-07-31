@@ -9,7 +9,7 @@ body{
   background-image: url('./the-creative-exchange-pAnjPqQP0UQ-unsplash.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: fixed;
+  background-position: center;
 }
 
 .App {

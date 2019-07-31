@@ -2,22 +2,18 @@ import React from 'react'
 import SnackIngredient from '../components/SnackIngredient'
 import SweetOrSalty from '../components/SweetOrSalty';
 import Api from '../services/api';
+import { Link } from 'react-router-dom';
 
 class SnackViewContainer extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-          snack: this.props.snack,
+          snack: this.getSnack(),
           owner: this.props.snack ? this.props.snack.user.username : null
         }
-        // if(!this.state.snack ){
-        //   Api.getSnack(this.props.match.params.id)
-        //   .then(snack => this.setState({snack}))
-        // }
+
     }
-// ,
-// owner: this.props.snack.user.username
-    snackCreator = () => {
+        snackCreator = () => {
         //compare the snack's user with the token--if they match
         //return true (to display edit and delete buttons)
         //else return false (to display the save button)
@@ -58,12 +54,17 @@ class SnackViewContainer extends React.Component {
             return <SweetOrSalty type='mixed' />
           }
     }
-
+    getSnack = () => {
+          Api.getSnack(this.props.match.params.id)
+          .then(snack => {
+            this.props.getSnack(snack)
+        })
+        return ""
+    }
     render(){
         return (
-
             <div className='view-snack-container'>
-              <p>{this.props.snack ? this.state.owner: null}'s Pantry</p>
+              <p>{this.props.snack ? this.props.snack.user.username : null}'s Pantry</p>
                <h3>{this.props.snack ? this.props.snack.name : null}</h3>
                <br />
                {this.props.snack ? this.sweetOrSalty(): null}
@@ -79,6 +80,8 @@ class SnackViewContainer extends React.Component {
                {this.snackCreator() ?
                <div className='userSnackDashboard'>
                 <button className='edit' onClick={(e) => this.buttonRedirect(e)}>Edit This Snack</button>
+                <Link className='edit' to={{pathname:`/snacks/${this.props.snack ? this.props.snack.id: null}/edit`, snack: this.props.snack }}> Edit</Link>
+
                 <button className='delete' onClick={(e) => this.buttonRedirect(e)}>Delete This Snack</button>
                </div>
                :
@@ -91,6 +94,4 @@ class SnackViewContainer extends React.Component {
         )
     }
 }
-
 export default SnackViewContainer
-//                <p>{this.state.owner}'s Pantry</p>
