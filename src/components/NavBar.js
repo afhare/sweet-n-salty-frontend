@@ -12,7 +12,7 @@ const Navbar = props => {
         </div>
       <div>
       <Link to="/snacks" className="button">Snack Index</Link>
-        <Link to="/new_snack" className="button">New Snack</Link>
+        <Link to="/snacks/new" className="button">New Snack</Link>
         {
           localStorage.getItem("user") ?
             <a onClick={() => {

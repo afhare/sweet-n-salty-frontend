@@ -109,6 +109,11 @@ class EditSnackContainer extends React.Component {
       this.props.handleEditFormSubmit(e,state)
       this.props.history.push("/snacks")
     }
+    createSnackIngredient = (ingredientObj) => {
+        this.setState({
+            newIngredients: [...this.state.newIngredients, ingredientObj]
+        })
+    }
     renderAll = () => {
       const { mixes } = this.state
       const { saltyIngredients, sweetIngredients,handleEditFormSubmit } = this.props
