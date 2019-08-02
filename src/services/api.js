@@ -47,4 +47,29 @@ export default {
     }
     return fetch(`${API_LINK}snacks/${snackId}`,reqObj).then(response => response.json())
   },
+  fetchUser: (bodyObj) =>{
+    const reqObj = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(bodyObj)
+    }
+
+    return fetch(`${API_LINK}api/v1/login`, reqObj)
+      .then(resp => resp.json())
+  },
+  createUser: (bodyObj) =>{
+    const reqObj = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(bodyObj)
+    }
+    return fetch(`${API_LINK}api/v1/users`, reqObj)
+      .then(resp => resp.json())
+  },
 }

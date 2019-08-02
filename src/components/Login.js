@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom';
 import logo from '../logo-complete.svg'
+import Api from '../services/api';
 
 class Login extends React.Component {
   constructor(props){
@@ -23,18 +24,7 @@ class Login extends React.Component {
       password: this.state.password
     }}
 
-    const reqObj = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(bodyObj)
-    }
-
-    fetch('http://localhost:3000/api/v1/login', reqObj)
-      .then(resp => resp.json())
-      .then(user => {
+      Api.fetchUser(bodyObj).then(user => {
         if(!user['error']){
           this.props.getUser(user)
         }else {
