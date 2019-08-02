@@ -1,4 +1,5 @@
-const API_LINK = "http://localhost:3000/"
+// const API_LINK = "http://localhost:3000/"
+const API_LINK = "https://sweet-n-salty-backend.herokuapp.com/"
 export default {
 
   fetchIngredients: () => {
