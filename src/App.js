@@ -132,7 +132,7 @@ class App extends React.Component {
               return <Register {...routeProps} getUser={this.getUser}/>
             }} />
 
-          <Route exact path="/new_snack" render={(routeProps) => {
+          <Route exact path="/snacks/new" render={(routeProps) => {
               return <NewSnackContainer {...routeProps} saltyIngredients={this.state.saltyIngredients} sweetIngredients={this.state.sweetIngredients} handleNewFormSubmit={this.handleNewFormSubmit}/>
             }} />
           <Route exact path="/snacks" render={(routeProps) => {
